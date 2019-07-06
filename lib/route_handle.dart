@@ -58,17 +58,24 @@ class RouteHandle implements Route {
     _onLeaveController.close();
     _onPreLeaveController.close();
     _childHandles
-        ..forEach((RouteHandle c) => c.discard())
-        ..clear();
+      ..forEach((RouteHandle c) => c.discard())
+      ..clear();
     _route = null;
   }
 
   /// Not supported. Overridden to throw an error.
   @override
-  void addRoute({String name, Pattern path, bool defaultRoute: false,
-      RouteEnterEventHandler enter, RoutePreEnterEventHandler preEnter,
-      RoutePreLeaveEventHandler preLeave, RouteLeaveEventHandler leave,
-      mount, dontLeaveOnParamChanges: false, String pageTitle,
+  void addRoute(
+      {String name,
+      Pattern path,
+      bool defaultRoute: false,
+      RouteEnterEventHandler enter,
+      RoutePreEnterEventHandler preEnter,
+      RoutePreLeaveEventHandler preLeave,
+      RouteLeaveEventHandler leave,
+      mount,
+      dontLeaveOnParamChanges: false,
+      String pageTitle,
       List<Pattern> watchQueryParameters}) {
     throw new UnsupportedError('addRoute is not supported in handle');
   }
@@ -79,7 +86,8 @@ class RouteHandle implements Route {
 
   @override
   Route findRoute(String routePath) {
-    Route r = _assertState(() => _getHost(_route).findRoute(routePath));
+    Route r =
+        _assertState(() => _getHost(_route).findRoute(routePath)) as Route;
     if (r == null) return null;
     var handle = r.newHandle();
     if (handle != null) _childHandles.add(handle);
@@ -99,7 +107,7 @@ class RouteHandle implements Route {
     _assertState();
     if (r == null) throw new StateError('Oops?!');
     if ((r is Route) && (r is! RouteHandle)) return r;
-    RouteHandle rh = r;
+    RouteHandle rh = r as RouteHandle;
     return rh._getHost(rh._route);
   }
 

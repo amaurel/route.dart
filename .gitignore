@@ -12,3 +12,4 @@ dartium
 .analysis_options
 .pub
 .idea
+.dart_tool

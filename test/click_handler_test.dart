@@ -29,7 +29,7 @@ main() {
       root = new DivElement();
       document.body.append(root);
       linkHandler = new DefaultWindowClickHandler(new DefaultRouterLinkMatcher(), router, true, mockWindow,
-          (String hash) => hash.isEmpty ? '' : hash.substring(1));
+          (  hash) => hash.isEmpty ? '' : hash.substring(1));
     });
 
     tearDown(() {

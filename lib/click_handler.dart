@@ -5,7 +5,7 @@ import 'dart:html';
 import 'link_matcher.dart';
 import 'client.dart';
 
-typedef String _HashNormalizer(String);
+typedef String _HashNormalizer(String s);
 
 /**
  * WindowClickHandler can be used as a hook into [Router] to
@@ -38,13 +38,13 @@ class DefaultWindowClickHandler {
                      this._normalizer);
 
   void call(Event e) {
-    Element el = e.target;
+    Element el = e.target as Element;
     while (el != null && el is! AnchorElement) {
       el = el.parent;
     };
     if (el == null) return;
     assert(el is AnchorElement);
-    AnchorElement anchor = el;
+    AnchorElement anchor = el as AnchorElement;
     if (!_linkMatcher.matches(anchor)) {
       return;
     }
