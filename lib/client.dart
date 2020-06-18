@@ -810,7 +810,8 @@ class Router {
     }
     return '?' +
         queryParams.keys
-            .map((key) => '$key=${Uri.encodeComponent(queryParams[key] as String)}')
+            .map((key) =>
+                '$key=${Uri.encodeComponent(queryParams[key] as String)}')
             .join('&');
   }
 
@@ -910,7 +911,8 @@ class Router {
    * On older browsers [Location.assign] is used instead with the fragment
    * version of the UrlPattern.
    */
-  Future<bool> gotoUrl(String url) => route(url).then((success) {
+  Future<bool> gotoUrl(String url) =>
+      route(url).then((success) {
         if (success) {
           _go(url, null, false);
         }
@@ -926,6 +928,9 @@ class Router {
     } else {
       if (title == null) {
         title = (_window.document as HtmlDocument).title;
+      }
+      if (path.isEmpty){
+        path = '/';
       }
       if (replace) {
         _window.history.replaceState(null, title, path);
